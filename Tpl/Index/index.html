@@ -6,39 +6,88 @@
 		<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.js"></script>
 		<script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.js"></script>
 		<style>
-			.box {border-width:1px;border-radius:4px 4px 0 0;border-color:#ddd}
+			.box {border-width:1px;border-radius:4px;border-color:#ddd;border-style:solid;padding:20px;}
+			.box1 {padding:20px;text-align:center}
+			.table {margin-bottom:0}
+			.text {line-height:30px;}
 		</style>
 	</head>
 	<body>
-		<div class="container box" style="margin-top:30px;">
-			<div class="row">
+		<div class="container">
+			<div class="row box1">
+				<h3>今天是{$done.date}，今天的任务<if condition="$done.status eq 1">已经完成<else />还没有完成</if></h3>
+			</div>
+			<div class="row box">
 				<table class="table table-hover ">
-					<tr>
-						<th>项目ID</th>
-						<th>1</th>
-						<th>2</th>
-						<th>3</th>
-					</tr>
-					<tr>
-						<td>早晨</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-					</tr>
-					<tr>
-						<td>中午</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-					</tr>
-					<tr>
-						<td>晚上</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-						<td>未打卡</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>项目ID</th>
+							<th>1</th>
+							<th>2</th>
+							<th>3</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="morning">
+							<td>早晨</td>
+							<td class="dkc">{$status.morning}</td>
+							<td class="dkc">{$status.morning}</td>
+							<td class="dkc">{$status.morning}</td>
+						</tr>
+						<tr class="noon">
+							<td>中午</td>
+							<td class="dkc">{$status.noon}</td>
+							<td class="dkc">{$status.noon}</td>
+							<td class="dkc">{$status.noon}</td>
+						</tr>
+						<tr class="night">
+							<td>晚上</td>
+							<td class="dkc">{$status.night}</td>
+							<td class="dkc">{$status.night}</td>
+							<td class="dkc">{$status.night}</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
+			<div class="row box1">
+				<h4>
+					即将开始的任务是：
+				</h4>
+				<p class="bg-success text">
+					做200000个俯卧撑
+				</p>
+				<p class="bg-success text">
+					做500000个仰卧起坐
+				</p>
+				<if condition="$intime eq 1">
+				<button type="button" class="btn btn-primary btn-lg dk">任务完成打卡</button>
+				<else />
+				<button type="button" class="btn btn-primary btn-lg" disabled="disabled">即将允许打卡</button>
+				</if>
+			</div>
 		</div>
+		<script>
+			//$(document).ready(function(){
+			$('.dk').click(function(){
+				$.post('__URL__/checkin',{},function(res){
+					if(res.status){
+						html = "<span class='text-primary'><i class='glyphicon glyphicon-ok'></i>"+res.time+"</span>";
+						switch(res.dkc){
+							case 1:
+								$('.morning td.dkc').html(html);
+								break;
+							case 2:
+								$('.noon td.dkc').html(html);
+								break;
+							case 3:
+								$('.night td.dkc').html(html);
+								break;
+						}
+					}else{
+						alert(res.info);
+					}
+				},'json');
+			});
+		</script>
 	</body>
 </html>
