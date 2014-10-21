@@ -4,9 +4,9 @@ class IndexAction extends Action {
     public function index(){
 		$time = time();
 		$record = D('checkin')->where('dateline = '.strtotime(date('Y-m-d',$time)))->find();
-		$status['morning'] = $record['morning']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i>".date('H:i',$record['morning'])."</span>";
-		$status['noon'] = $record['noon']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i>".date('H:i',$record['noon'])."</span>";
-		$status['night'] = $record['night']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i>".date('H:i',$record['night'])."</span>";
+		$status['morning'] = $record['morning']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i> ".date('H:i',$record['morning'])."</span>";
+		$status['noon'] = $record['noon']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i> ".date('H:i',$record['noon'])."</span>";
+		$status['night'] = $record['night']==0?'未打卡':"<span class='text-primary'><i class='glyphicon glyphicon-ok'></i> ".date('H:i',$record['night'])."</span>";
 		if(($record['morning']==0)||($record['noon']==0)||($record['night']==0)){
 			$done = array('status'=>0,'date'=>date('Y年m月d日',$time));
 		}else{
@@ -14,12 +14,12 @@ class IndexAction extends Action {
 		}
 		$hour = date('H',time());
 		switch($hour){
-			case ((07<=$hour)&&($hour<11)):
+			case ((07<=$hour)&&($hour<08)):
 				if($record['morning']==0){
 					$return = 1;
 				}
 				break;
-			case ((11<=$hour)&&($hour<17)):
+			case ((11<=$hour)&&($hour<13)):
 				if($record['noon']==0){
 					$return = 1;
 				}
@@ -41,10 +41,10 @@ class IndexAction extends Action {
 		$hour = date('H',$time);
 		$return = 0;
 		switch($hour){
-			case ((07<=$hour)&&($hour<11)):
+			case ((07<=$hour)&&($hour<08)):
 				$return = $this->check(1);
 				break;
-			case ((11<=$hour)&&($hour<17)):
+			case ((11<=$hour)&&($hour<13)):
 				$return = $this->check(2);
 				break;
 			case ((17<=$hour)&&($hour<23)):

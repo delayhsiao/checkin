@@ -71,7 +71,7 @@
 			$('.dk').click(function(){
 				$.post('__URL__/checkin',{},function(res){
 					if(res.status){
-						html = "<span class='text-primary'><i class='glyphicon glyphicon-ok'></i>"+res.time+"</span>";
+						html = "<span class='text-primary'><i class='glyphicon glyphicon-ok'></i> "+res.time+"</span>";
 						switch(res.dkc){
 							case 1:
 								$('.morning td.dkc').html(html);
