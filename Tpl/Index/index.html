@@ -25,11 +25,13 @@
 							<th>1</th>
 							<th>2</th>
 							<th>3</th>
+							<th>4</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="morning">
 							<td>早晨</td>
+							<td class="dkc">{$status.morning}</td>
 							<td class="dkc">{$status.morning}</td>
 							<td class="dkc">{$status.morning}</td>
 							<td class="dkc">{$status.morning}</td>
@@ -39,9 +41,11 @@
 							<td class="dkc">{$status.noon}</td>
 							<td class="dkc">{$status.noon}</td>
 							<td class="dkc">{$status.noon}</td>
+							<td class="dkc">{$status.noon}</td>
 						</tr>
 						<tr class="night">
 							<td>晚上</td>
+							<td class="dkc">{$status.night}</td>
 							<td class="dkc">{$status.night}</td>
 							<td class="dkc">{$status.night}</td>
 							<td class="dkc">{$status.night}</td>
@@ -53,12 +57,56 @@
 				<h4>
 					即将开始的任务是：
 				</h4>
-				<p class="bg-success text">
-					做200000个俯卧撑
-				</p>
-				<p class="bg-success text">
-					做500000个仰卧起坐
-				</p>
+				<switch name="sport">
+					<case value="1" break="1">
+						<div id="sport1">
+							<p class="bg-success text">
+								20个俯卧撑
+							</p>
+							<p class="bg-success text">
+								20个仰卧起坐
+							</p>
+							<p class="bg-success text">
+								坐体前屈20个
+							</p>
+							<p class="bg-success text">
+								转体动作左右各10个
+							</p>
+						</div>
+					</case>
+					<case value="2" break="1">
+						<div id="sport2">
+							<p class="bg-success text">
+								10个俯卧撑，两组，中间休息5分钟
+							</p>
+							<p class="bg-success text">
+								10个仰卧起坐，两组，中间休息5分钟
+							</p>
+							<p class="bg-success text">
+								坐体前屈10个，两组，中间休息5分钟
+							</p>
+							<p class="bg-success text">
+								转体动作10个，两组，中间休息5分钟
+							</p>
+						</div>
+					</case>
+					<case value="3" break="1">
+						<div id="sport3">
+							<p class="bg-success text">
+								20个俯卧撑
+							</p>
+							<p class="bg-success text">
+								20个仰卧起坐
+							</p>
+							<p class="bg-success text">
+								坐体前屈10个，五组，中间休息5分钟
+							</p>
+							<p class="bg-success text">
+								转体动作10个，五组，中间休息5分钟
+							</p>
+						</div>
+					</case>
+				</switch>
 				<if condition="$intime eq 1">
 				<button type="button" class="btn btn-primary btn-lg dk">任务完成打卡</button>
 				<else />

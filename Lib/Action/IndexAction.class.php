@@ -30,6 +30,14 @@ class IndexAction extends Action {
 				}
 				break;
 		}
+		if((07<=$hour)&&($hour<11)){
+			$sport = 1;
+		}elseif((11<=$hour)&&($hour<17)){
+			$sport = 2;
+		}else{
+			$sport = 3;
+		}
+		$this->assign('sport',$sport);
 		$this->assign('intime',$return);
 		$this->assign('done',$done);
 		$this->assign('status',$status);
