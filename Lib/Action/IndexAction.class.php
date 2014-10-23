@@ -14,7 +14,7 @@ class IndexAction extends Action {
 		}
 		$hour = date('H',time());
 		switch($hour){
-			case ((07<=$hour)&&($hour<08)):
+			case ((07<=$hour)&&($hour<10)):
 				if($record['morning']==0){
 					$return = 1;
 				}
@@ -49,7 +49,7 @@ class IndexAction extends Action {
 		$hour = date('H',$time);
 		$return = 0;
 		switch($hour){
-			case ((07<=$hour)&&($hour<08)):
+			case ((07<=$hour)&&($hour<10)):
 				$return = $this->check(1);
 				break;
 			case ((11<=$hour)&&($hour<13)):
